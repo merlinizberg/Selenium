@@ -15,6 +15,24 @@ public class insuranceTest {
     WebDriver driver;
     @Test
     public void test() throws InterruptedException {
+        String insurance = "//a[contains(text(), 'Страхование')]";
+        String DMC = "//a[contains(text(), 'ДМС')]";
+        String DMC2 = "//h1[contains(text(), 'добровольное медицинское страхование')]";
+        String send = "//a[contains(text(), 'Отправить заявку')]";
+        String checksend = "//b[contains(text(), 'Заявка на добровольное медицинское страхование')]";
+        String lastname = "//input[@name ='LastName']";
+        String firstname = "//input[@name ='FirstName']";
+        String middleName = "//input[@name ='MiddleName']";
+        String region = "//select[@name ='Region']" ;
+        String regionnuber = "//option[@value ='77']";
+        String number = "//div/label[contains(text(), 'Телефон')]/following-sibling::input";
+        String date = "//div/label[contains(text(), 'Предпочитаемая дата контакта')]/following-sibling::input";
+        String email = "//input[@name ='Email']";
+        String checkbox = "//input[@type ='checkbox']";
+        String senddmc = "//button[contains(text(), 'Отправить')]";
+        String checkemail = "//span[contains(text(), 'Введите адрес электронной почты')]";
+
+
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.setBinary("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
@@ -23,79 +41,54 @@ public class insuranceTest {
         driver.navigate().to("https://rgs.ru");
         WebDriverWait wait = new WebDriverWait(driver, 10);
 
-        WebElement mainpageButton = driver.findElement(By.xpath("//a[contains(text(), 'Страхование')]"));
-        wait.until(ExpectedConditions.visibilityOf(mainpageButton));
-        mainpageButton.click();
+        WebElement mainElement = driver.findElement(By.xpath(insurance));
+        wait.until(ExpectedConditions.visibilityOf(mainElement)).click();
 
-        WebElement DMCButton = driver.findElement(By.xpath("//a[contains(text(), 'ДМС')]"));
-        wait.until(ExpectedConditions.visibilityOf(DMCButton));
-        DMCButton.click();
+        mainElement = driver.findElement(By.xpath(DMC));
+        wait.until(ExpectedConditions.visibilityOf(mainElement)).click();
 
-        WebElement DMCword = driver.findElement(By.xpath("//h1[contains(text(), 'добровольное медицинское страхование')]"));
-        DMCword.isDisplayed();
+        mainElement = driver.findElement(By.xpath(DMC2));
+        mainElement.isDisplayed();
 
-        WebElement zayavButton = driver.findElement(By.xpath("//a[contains(text(), 'Отправить заявку')]"));
-        wait.until(ExpectedConditions.visibilityOf(zayavButton));
-        zayavButton.click();
+        mainElement = driver.findElement(By.xpath(send));
+        wait.until(ExpectedConditions.visibilityOf(mainElement)).click();
 
-        WebElement DMCzayaword = driver.findElement(By.xpath("//b[contains(text(), 'Заявка на добровольное медицинское страхование')]"));
-        DMCzayaword.isDisplayed();
+        mainElement = driver.findElement(By.xpath(checksend));
+        mainElement.isDisplayed();
 
-        WebElement LastName = driver.findElement(By.xpath("//input[@name ='LastName']"));
-        wait.until(ExpectedConditions.visibilityOf(LastName));
-        LastName.sendKeys("фвпыФАВ");
-        LastName.click();
+        mainElement = driver.findElement(By.xpath(lastname));
+        wait.until(ExpectedConditions.visibilityOf(mainElement)).sendKeys("фвпыФАВ");
 
-        WebElement FirstName = driver.findElement(By.xpath("//input[@name ='FirstName']"));
-        FirstName.sendKeys("фвпыФАВ");
+        mainElement = driver.findElement(By.xpath(firstname));
+        mainElement.sendKeys("фвпыФАВ");
 
-        WebElement MiddleName = driver.findElement(By.xpath("//input[@name ='MiddleName']"));
-        MiddleName.sendKeys("фвпыФАВ");
+        mainElement = driver.findElement(By.xpath(middleName));
+        mainElement.sendKeys("фвпыФАВ");
 
-        WebElement region = driver.findElement(By.xpath("//select[@name ='Region']"));
-        region.click();
+        mainElement = driver.findElement(By.xpath(region));
+        mainElement.click();
 
-        WebElement Phone = driver.findElement(By.xpath("//div/label[contains(text(), 'Телефон')]/following-sibling::input"));
-        Phone.sendKeys("8005553535");
+        mainElement = driver.findElement(By.xpath(regionnuber));
+        mainElement.click();
 
-        WebElement Date = driver.findElement(By.xpath("//div/label[contains(text(), 'Предпочитаемая дата контакта')]/following-sibling::input"));
-        Date.sendKeys(" 16092019");
+        mainElement = driver.findElement(By.xpath(number));
+        mainElement.sendKeys("8005553535");
 
-        WebElement email = driver.findElement(By.xpath("//input[@name ='Email']"));
-        email.sendKeys("qwertyqwerty");
+        mainElement = driver.findElement(By.xpath(date));
+        mainElement.sendKeys(" 16092019");
 
-        WebElement regionmsk = driver.findElement(By.xpath("//option[@value ='77']"));
-        regionmsk.click();
+        mainElement = driver.findElement(By.xpath(email));
+        mainElement.sendKeys("qwertyqwerty");
 
-        WebElement checkbox = driver.findElement(By.xpath("//input[@type ='checkbox']"));
-        checkbox.click();
+        mainElement = driver.findElement(By.xpath(checkbox));
+        mainElement.click();
 
-        WebElement completeButton = driver.findElement(By.xpath("//button[contains(text(), 'Отправить')]"));
-        completeButton.click();
+        mainElement = driver.findElement(By.xpath(senddmc));
+        mainElement.click();
 
-        WebElement errcheck = driver.findElement(By.xpath("//span[contains(text(), 'Введите адрес электронной почты')]"));
-        errcheck.isDisplayed();
+        mainElement = driver.findElement(By.xpath(checkemail));
+        mainElement.isDisplayed();
 
-
-        driver.navigate().to("https://www.sberbank.ru/ru/person");
-
-        WebElement regionsbt = driver.findElement(By.xpath("//a[@class = 'hd-ft-region']"));
-        wait.until(ExpectedConditions.visibilityOf(regionsbt));
-        regionsbt.click();
-
-        WebElement district = driver.findElement(By.xpath("//a[contains(text(), 'Нижегородская область')]"));
-        district.click();
-
-        WebElement districtcheck = driver.findElement(By.xpath("//span[contains(text(), 'Нижегородская область')]"));
-        districtcheck.isDisplayed();
-
-        WebElement scrollLocation = driver.findElement(By.xpath("//ul[@class='footer__social']"));
-        JavascriptExecutor js = (JavascriptExecutor)driver;
-        js.executeScript("arguments[0].scrollIntoView(true);", scrollLocation);
-
-        WebElement socialbar = driver.findElement(By.xpath("//ul[@class='footer__social']"));
-        socialbar.isDisplayed();
-
-        driver.quit();
+        //driver.quit();
     }
 }
