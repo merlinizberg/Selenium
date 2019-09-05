@@ -9,20 +9,21 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Sleeper;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import static org.junit.Assert.*;
 
 public class insuranceTest {
 
     WebDriver driver;
     @Test
     public void test() throws InterruptedException {
-        String insurance = "//a[contains(text(), 'Страхование')]";
+        String menu = "//li[@class='dropdown adv-analytics-navigation-line1-link current']";//a[contains(text(), 'Меню')]
         String DMC = "//a[contains(text(), 'ДМС')]";
         String DMC2 = "//h1[contains(text(), 'добровольное медицинское страхование')]";
         String send = "//a[contains(text(), 'Отправить заявку')]";
         String checksend = "//b[contains(text(), 'Заявка на добровольное медицинское страхование')]";
         String lastname = "//input[@name ='LastName']";
         String firstname = "//input[@name ='FirstName']";
-        String middleName = "//input[@name ='MiddleName']";
+        String middlename = "//input[@name ='MiddleName']";
         String region = "//select[@name ='Region']" ;
         String regionnuber = "//option[@value ='77']";
         String number = "//div/label[contains(text(), 'Телефон')]/following-sibling::input";
@@ -41,7 +42,7 @@ public class insuranceTest {
         driver.navigate().to("https://rgs.ru");
         WebDriverWait wait = new WebDriverWait(driver, 10);
 
-        WebElement mainElement = driver.findElement(By.xpath(insurance));
+        WebElement mainElement = driver.findElement(By.xpath(menu));
         wait.until(ExpectedConditions.visibilityOf(mainElement)).click();
 
         mainElement = driver.findElement(By.xpath(DMC));
@@ -62,7 +63,7 @@ public class insuranceTest {
         mainElement = driver.findElement(By.xpath(firstname));
         mainElement.sendKeys("фвпыФАВ");
 
-        mainElement = driver.findElement(By.xpath(middleName));
+        mainElement = driver.findElement(By.xpath(middlename));
         mainElement.sendKeys("фвпыФАВ");
 
         mainElement = driver.findElement(By.xpath(region));
@@ -87,8 +88,15 @@ public class insuranceTest {
         mainElement.click();
 
         mainElement = driver.findElement(By.xpath(checkemail));
-        mainElement.isDisplayed();
 
-        //driver.quit();
+        assertEquals("фвпыФАВ", driver.findElement(By.xpath(firstname)).getAttribute("value"));
+        assertEquals("фвпыФАВ", driver.findElement(By.xpath(lastname)).getAttribute("value"));
+        assertEquals("фвпыФАВ", driver.findElement(By.xpath(middlename)).getAttribute("value"));
+        assertEquals("qwertyqwerty", driver.findElement(By.xpath(email)).getAttribute("value"));
+        assertEquals("+7 (800) 555-35-35", driver.findElement(By.xpath(number)).getAttribute("value"));
+        assertEquals("16.09.2019", driver.findElement(By.xpath(date)).getAttribute("value"));
+        wait.until(ExpectedConditions.visibilityOf(mainElement));
+        mainElement.isDisplayed();
+        driver.quit();
     }
 }
