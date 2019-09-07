@@ -88,6 +88,7 @@ public class insuranceTest {
         mainElement.click();
 
         mainElement = driver.findElement(By.xpath(checkemail));
+        wait.until(ExpectedConditions.visibilityOf(mainElement));
 
         assertEquals("фвпыФАВ", driver.findElement(By.xpath(firstname)).getAttribute("value"));
         assertEquals("фвпыФАВ", driver.findElement(By.xpath(lastname)).getAttribute("value"));
@@ -95,7 +96,7 @@ public class insuranceTest {
         assertEquals("qwertyqwerty", driver.findElement(By.xpath(email)).getAttribute("value"));
         assertEquals("+7 (800) 555-35-35", driver.findElement(By.xpath(number)).getAttribute("value"));
         assertEquals("16.09.2019", driver.findElement(By.xpath(date)).getAttribute("value"));
-        wait.until(ExpectedConditions.visibilityOf(mainElement));
+
         mainElement.isDisplayed();
         driver.quit();
     }
