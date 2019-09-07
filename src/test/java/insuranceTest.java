@@ -9,6 +9,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Sleeper;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.Assert.*;
 
 public class insuranceTest {
@@ -87,6 +90,7 @@ public class insuranceTest {
         mainElement = driver.findElement(By.xpath(senddmc));
         mainElement.click();
 
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         mainElement = driver.findElement(By.xpath(checkemail));
         wait.until(ExpectedConditions.visibilityOf(mainElement));
 
