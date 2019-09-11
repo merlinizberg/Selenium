@@ -35,6 +35,8 @@ public class insuranceTest {
         String checkbox = "//input[@type ='checkbox']";
         String senddmc = "//button[contains(text(), 'Отправить')]";
         String checkemail = "//span[contains(text(), 'Введите адрес электронной почты')]";
+        String checkemail2 = "//input[@class ='form-control validation-control-has-error']";
+
 
 
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
@@ -63,6 +65,9 @@ public class insuranceTest {
         mainElement = driver.findElement(By.xpath(lastname));
         wait.until(ExpectedConditions.visibilityOf(mainElement)).sendKeys("фвпыФАВ");
 
+        mainElement = driver.findElement(By.xpath(email));
+        mainElement.sendKeys("qwertyqwerty");
+
         mainElement = driver.findElement(By.xpath(firstname));
         mainElement.sendKeys("фвпыФАВ");
 
@@ -81,16 +86,14 @@ public class insuranceTest {
         mainElement = driver.findElement(By.xpath(date));
         mainElement.sendKeys(" 16092019");
 
-        mainElement = driver.findElement(By.xpath(email));
-        mainElement.sendKeys("qwertyqwerty");
-
         mainElement = driver.findElement(By.xpath(checkbox));
         mainElement.click();
 
         mainElement = driver.findElement(By.xpath(senddmc));
         mainElement.click();
 
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        mainElement = driver.findElement(By.xpath(checkemail2));
+        wait.until(ExpectedConditions.visibilityOf(mainElement));
         mainElement = driver.findElement(By.xpath(checkemail));
         wait.until(ExpectedConditions.visibilityOf(mainElement));
 
@@ -102,6 +105,6 @@ public class insuranceTest {
         assertEquals("16.09.2019", driver.findElement(By.xpath(date)).getAttribute("value"));
 
         mainElement.isDisplayed();
-        driver.quit();
+        //driver.quit();
     }
 }
